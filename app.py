@@ -1,6 +1,6 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, url_for, redirect, request
 app= Flask(__name__)
-@app.route("/")
+@app.route("/count")
 def index():
     f= open("count.txt", "r")
     count=int(f.read())
@@ -12,7 +12,13 @@ def index():
     f.write(str(count))
     f.close()
 
-    return render_template("index.html", count=count)
+    return render_template("count.html", count=count)
+@app.route("/")
+def hey():
+	# return "Hello"
+    return render_template("index.html")
+
+
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
